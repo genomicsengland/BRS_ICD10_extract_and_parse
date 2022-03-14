@@ -39,12 +39,12 @@ Confluence Page: https://cnfl.extge.co.uk/display/REBS/ICD-10%3A+Parse+and+Extra
     - Trailing characters are stripped from ICD-10 codes, including (X, D, A, S, -, ~). See 'Special Characters' below
     - R69X3, R69X6, R69X8 are preserved as they represent reserved codes
     - This table is saved (icd10_clean)
-9. The unique observations of participant_id and icd10 are taken from icd10_clean. This table is saved (icd10_unique)
+9. The unique observations of participant_id and icd10 with description are taken from icd10_clean. This table is saved (icd10_unique)
 
 # Outputs
 - **icd10_full**: all pre-cleaned ICD-10 entries in a wide-format table containing: participant_id, origin, start, diag_01 - diag_20
 - **icd10_clean**: cleaned ICD-10 entries in a long-format table containing: participant_id, table id, start, diag, icd10 per row (unique combination per row)
-- **icd10_unique**: a two-column table containing: participant_id and icd10 where every row is unique
+- **icd10_unique**: a three-column table containing: participant_id and icd10 with description where every row is unique
 
 
 Note as reference the number of rows in the original raw data (MPV14): 
@@ -139,5 +139,7 @@ Seventh character extensions for injuries (not including fractures) include:
 - "D" (Subsequent encounter) - An encounter after the active phase of treatment and when the patient is receiving routine care for the injury during the period of healing or recovery.
 - "S" (Sequela) - Complications that arise as a direct result of a condition.
 
-The hyphen or dash (-) at the end of an ICD-10 code indicates that additional characters are required on the code (it is not complete). To find the most specific code with additional characters, the coder would look up the more specific complete Alphabetic Index code in the Tabular Listing. 
+The hyphen or dash (-) at the end of an ICD-10 code indicates that additional characters are required on the code (it is not complete). To find the most specific code with additional characters, the coder would look up the more specific complete Alphabetic Index code in the Tabular Listing.
 
+# Lookup
+To map ICD10 codes to descriptions, the UK Biobank ICD10 lookup table is used (https://biobank.ndph.ox.ac.uk/ukb/coding.cgi?id=19). Description: ICD10 - WHO International Classification of Diseases. ICD-10 codes, terms and text used by permission of WHO, from: International Statistical Classification of Diseases and Related Health Problems, Tenth Revision (ICD-10). Vols 1-3. Geneva, World Health Organization, 1992-2016. This is a hierarchical tree-structured dictionary which uses strings (character sequences) to represent categories or special values
